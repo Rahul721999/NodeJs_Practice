@@ -14,11 +14,13 @@ const PORT = process.env.PORT;
 import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: false}));
+app.use((req, res, next)=>{
+
+    console.log("This is a middleware");
+    next()
+})
 
 app.listen(PORT, () => console.log(`server is running on PORT no: ${PORT}`));
-
-
-
 
 
 
@@ -42,6 +44,8 @@ app.post('/create', async(req, res)=>{
     }
 })
 
+
+
 /* ------------------------Read API------------------------ */
 
 app.get('/read', async (req, res) => {
@@ -62,6 +66,8 @@ app.get('/read', async (req, res) => {
         await disconnect();
     }
 })
+
+
 
 /* ------------------------Update API------------------------ */
 app.put('/update', async (req, res) =>{
@@ -95,6 +101,8 @@ app.put('/update', async (req, res) =>{
         await disconnect();
     }
 })
+
+
 
 /* ------------------------Delete API------------------------ */
 app.delete('/delete', async(req, res)=>{
